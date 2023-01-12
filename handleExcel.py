@@ -4,9 +4,11 @@ from xlrd import xldate_as_tuple
 
 import xlsxwriter
 
+import sys
+
 # 导入需要读取的第一个Excel表格的路径
 
-data = xlrd.open_workbook(r'D:\\code\\python-excel\\etcOra.xlsx')
+data = xlrd.open_workbook(r'D:\\code\\python-excel-handle\\etcOra.xlsx')
 
 table = data.sheets()[1]
 
@@ -53,10 +55,11 @@ def write_excel(tables):
         lst = list(tables[n].values())
         for t in lst:
           worksheet.write(i, n, t)
+        print(n/len(tables))
         n += 1
     i += 1
 
-    workbook.save(r'D:\\code\\python-excel\\etc.xlsx')
+    workbook.save(r'D:\\code\\python-excel-handle\\etc.xlsx')
 
 
 def write(tables):
@@ -72,12 +75,21 @@ def write(tables):
   i = 1
   n = 0
   while n <= len(tables) - 1:
+    progress_bar(n, len(tables))
     lst = list(tables[n].values())
     worksheet.write_row(i, 0, lst)
-    # print(i, n, lst)
+    n += 1
     i += 1
+  
 
   workbook.close()  # 将excel文件保存关闭，如果没有这一行运行代码会报错
+
+def progress_bar(n, l):
+
+  print(n, l, sep="/")
+
+  sys.stdout.flush()
+
 
 if __name__ == '__main__':
 
