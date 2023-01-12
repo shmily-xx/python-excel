@@ -1,33 +1,24 @@
 import xlrd
-import xlwt
 from xlrd import xldate_as_tuple
-
 import xlsxwriter
-
 import sys
 
 # 导入需要读取的第一个Excel表格的路径
-
 data = xlrd.open_workbook(r'D:\\code\\python-excel-handle\\etcOra.xlsx')
-
+# 读取的sheet是第几个
 table = data.sheets()[1]
 
 # 创建一个空列表，存储Excel的数据
-
 tables = []
 
 # 将excel表格内容导入到tables列表中
-
-
 def import_excel(excel):
 
  #   for rown in range(5):
  for rown in range(excel.nrows):
+  array = {'entryTime': '', 'entryPort': '', 'leaveTime': '', 'leavePort': ''}
 
-  #  array = {'costTitle': '', 'entryTime': '', 'entryPort': '', 'leaveTime': '', 'leavePort': ''}
-   array = {'entryTime': '', 'entryPort': '', 'leaveTime': '', 'leavePort': ''}
-
-   str = table.cell_value(rown, 0)
+  str = table.cell_value(rown, 0)
   #  array['costTitle'] = str
    titleArr = str.split('|')
    array['entryTime'] = titleArr[0]
@@ -37,34 +28,8 @@ def import_excel(excel):
 
    tables.append(array)
 
-
-def write_excel(tables):
-    print("-"*50)
-
-    workbook = xlwt.Workbook(encoding='utf-8')
-    worksheet = workbook.add_sheet('ssss', cell_overwrite_ok=True)
-    # 循环写入表头
-    title = ["进站时间", "进站地点", "出站时间", "出站地点"]
-    for t in title:
-        # 写入excel
-        worksheet.write(0, 0, t)
-
-    i = 1
-    n = 0
-    while n <= len(tables) - 1:
-        lst = list(tables[n].values())
-        for t in lst:
-          worksheet.write(i, n, t)
-        print(n/len(tables))
-        n += 1
-    i += 1
-
-    workbook.save(r'D:\\code\\python-excel-handle\\etc.xlsx')
-
-
 def write(tables):
   workbook = xlsxwriter.Workbook('new_excel.xlsx')  # 新建excel表
-
 
   worksheet = workbook.add_worksheet('sheet1')  # 新建sheet（sheet的名称为"sheet1"）
 
