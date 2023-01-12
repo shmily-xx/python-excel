@@ -20,13 +20,13 @@ def import_excel(excel):
 
   str = table.cell_value(rown, 0)
   #  array['costTitle'] = str
-   titleArr = str.split('|')
-   array['entryTime'] = titleArr[0]
-   array['entryPort'] = titleArr[1]
-   array['leaveTime'] = titleArr[2]
-   array['leavePort'] = titleArr[3]
+  titleArr = str.split('|')
+  array['entryTime'] = titleArr[0]
+  array['entryPort'] = titleArr[1]
+  array['leaveTime'] = titleArr[2]
+  array['leavePort'] = titleArr[3]
 
-   tables.append(array)
+  tables.append(array)
 
 def write(tables):
   workbook = xlsxwriter.Workbook('new_excel.xlsx')  # 新建excel表
@@ -45,9 +45,9 @@ def write(tables):
     worksheet.write_row(i, 0, lst)
     n += 1
     i += 1
-  
 
   workbook.close()  # 将excel文件保存关闭，如果没有这一行运行代码会报错
+
 
 def progress_bar(n, l):
 
