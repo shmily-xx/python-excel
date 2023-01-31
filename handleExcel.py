@@ -22,9 +22,9 @@ def import_excel(excel):
   #  array['costTitle'] = str
   titleArr = str.split('|')
   array['entryTime'] = titleArr[0]
-  array['entryPort'] = titleArr[1]
+  array['entryPort'] = titleArr[1][:-2]
   array['leaveTime'] = titleArr[2]
-  array['leavePort'] = titleArr[3]
+  array['leavePort'] = titleArr[3][:-2]
 
   tables.append(array)
 
